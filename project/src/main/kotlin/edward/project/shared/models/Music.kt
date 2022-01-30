@@ -1,6 +1,6 @@
 package edward.project.shared.models
 
-data class BankAccount(
+data class Music(
     val acctType: String,
     val acctName: String,
     val acctAlias: String,

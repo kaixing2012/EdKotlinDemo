@@ -1,6 +1,6 @@
 package edward.project.featured.api.v1.ed0001
 
-import edward.project.shared.repositories.MockBankAccountRepository
+import edward.project.shared.repositories.MockMusicRepo
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("api/v1/ED0001")
 class ED0001Controller {
 
-    private val mockBankAccountRepo = MockBankAccountRepository()
+    private val mockBankAccountRepo = MockMusicRepo()
 
     @GetMapping
-    fun getED0001() = mockBankAccountRepo.getBankAccounts()
+    fun getED0001() = mockBankAccountRepo.getMusics()
 }
