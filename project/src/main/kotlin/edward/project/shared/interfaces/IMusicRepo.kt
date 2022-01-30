@@ -4,5 +4,5 @@ import edward.project.shared.models.Music
 
 interface IMusicRepo {
 
-    fun getMusics(): Collection<Music>
+    fun getMusicList(): Collection<Music>
 }

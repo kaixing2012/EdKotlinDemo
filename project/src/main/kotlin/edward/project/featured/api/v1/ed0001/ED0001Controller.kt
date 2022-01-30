@@ -12,5 +12,5 @@ class ED0001Controller {
     private val mockBankAccountRepo = MockMusicRepo()
 
     @GetMapping
-    fun getED0001() = mockBankAccountRepo.getMusics()
+    fun getED0001() = mockBankAccountRepo.getMusicList()
 }

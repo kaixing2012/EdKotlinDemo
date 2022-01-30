@@ -10,18 +10,18 @@ internal class MockMusicRepoTest {
     private val mockBankAccountRepo = MockMusicRepo()
 
     @Test
-    fun `collection of bank account should not be empty`() {
+    fun `collection of music should not be empty`() {
 
-        val musics = this.mockBankAccountRepo.getMusics()
+        val musicList = this.mockBankAccountRepo.getMusicList()
 
-        assertThat(musics).isNotEmpty
+        assertThat(musicList).isNotEmpty
     }
 
     @Test
-    fun `account name should not be blank`() {
+    fun `music name should not be blank`() {
 
-        val musics = this.mockBankAccountRepo.getMusics()
+        val musicList = this.mockBankAccountRepo.getMusicList()
 
-        assertThat(musics).allMatch({ acct -> acct.acctName.isNotBlank() }, "all account name have value")
+        assertThat(musicList).allMatch({ m -> m.name.isNotBlank()}, "all music name have value")
     }
 }
