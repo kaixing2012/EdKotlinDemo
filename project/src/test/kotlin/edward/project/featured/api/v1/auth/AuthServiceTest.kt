@@ -1,11 +1,8 @@
 package edward.project.featured.api.v1.auth
 
 import edward.project.featured.api.v1.auth.models.ReqRegisterJM
-import edward.project.featured.api.v1.auth.models.ResRegisterJM
 import edward.project.shared.constants.AuthConstant
-import edward.project.shared.models.User
 import edward.project.shared.repositories.IUserRepo
-import io.mockk.every
 
 import org.assertj.core.api.Assertions.*
 
@@ -13,6 +10,7 @@ import org.junit.jupiter.api.Test
 
 import io.mockk.mockk
 import io.mockk.verify
+import io.mockk.every
 
 internal class AuthServiceTest {
     private val userRepo: IUserRepo = mockk()
