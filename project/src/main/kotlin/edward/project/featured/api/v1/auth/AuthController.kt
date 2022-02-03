@@ -1,4 +1,4 @@
-package edward.project.featured.api.v1.ed0001
+package edward.project.featured.api.v1.auth
 
 
 import org.springframework.web.bind.annotation.GetMapping
@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("api/v1/ED0001")
-class ED0001Controller(
-    private val ed0001Service: ED0001Service
+class AuthController(
+    private val authService: AuthService
 ) {
 
     @GetMapping
-    fun getED0001() = this.ed0001Service.getUsers();
+    fun getED0001() = this.authService.getUsers();
 }

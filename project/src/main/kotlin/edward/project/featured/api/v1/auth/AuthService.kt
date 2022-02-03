@@ -1,11 +1,11 @@
-package edward.project.featured.api.v1.ed0001
+package edward.project.featured.api.v1.auth
 
 import edward.project.shared.models.User
 import edward.project.shared.repositories.IUserRepo
 import org.springframework.stereotype.Service
 
 @Service
-class ED0001Service (
+class AuthService (
     private val userRepo: IUserRepo
 ) {
     fun getUsers(): Collection<User> {
