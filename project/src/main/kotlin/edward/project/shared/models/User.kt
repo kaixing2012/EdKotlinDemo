@@ -1,49 +1,47 @@
 package edward.project.shared.models
 
-import org.hibernate.Hibernate
 import javax.persistence.*
-
 
 @Entity
 @Table(
-    name = "user",
+    name = "Users",
     uniqueConstraints = [
-        UniqueConstraint(name = "user_email_unique", columnNames = ["email"])
+        UniqueConstraint(name = "UserEmailUnique", columnNames = ["Email"])
     ]
 )
-data class User (
+data class User(
     @Id
     @SequenceGenerator(
-        name = "user_seq",
-        sequenceName = "user_seq",
+        name = "UserSeq",
+        sequenceName = "UserSeq",
         allocationSize = 1,
     )
     @GeneratedValue(
         strategy = GenerationType.SEQUENCE,
-        generator = "user_seq"
+        generator = "UserSeq"
     )
     @Column(
-        name = "id",
+        name = "Id",
         updatable = false
     )
     val id: Long = 0,
 
     @Column(
-        name = "first_name",
+        name = "FirstName",
         columnDefinition = "TEXT",
         nullable = false,
     )
     val firstName: String,
 
     @Column(
-        name = "last_name",
+        name = "LastName",
         columnDefinition = "TEXT",
         nullable = false,
     )
     val lastName: String,
 
     @Column(
-        name = "email",
+        name = "Email",
         columnDefinition = "TEXT",
         nullable = false,
         insertable = false,
@@ -52,15 +50,23 @@ data class User (
     val email: String,
 
     @Column(
-        name = "role",
-        columnDefinition = "TEXT",
-        nullable = false,
-    )
-    val role: String,
-
-    @Column(
-        name = "age",
+        name = "Age",
         nullable = false,
     )
     var age: Int,
+
+    @ManyToMany(
+        fetch = FetchType.EAGER,
+        cascade = [CascadeType.ALL]
+    )
+    @JoinTable(
+        name = "UserAndRoleJoin",
+        joinColumns = [
+            JoinColumn(name = "UserJoinId", referencedColumnName = "Id")
+        ],
+        inverseJoinColumns = [
+            JoinColumn(name = "RoleJoinId", referencedColumnName = "Id")
+        ]
+    )
+    val roles: MutableList<UserRole>,
 )

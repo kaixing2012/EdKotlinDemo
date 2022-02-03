@@ -1,7 +1,8 @@
-package edward.project.shared.repositories.mock
+package edward.project.shared.repositories.network
 
-import edward.project.shared.interfaces.IUserRepo
 import edward.project.shared.models.User
+import edward.project.shared.repositories.IUserRepo
+import edward.project.shared.repositories.IUserRoleRepo
 
 import org.assertj.core.api.Assertions.*
 
@@ -16,7 +17,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-internal class MockUserRepoTest() {
+internal class UserRepoTest() {
 
     @Autowired(required=true)
     lateinit var entityManager: TestEntityManager
@@ -24,11 +25,14 @@ internal class MockUserRepoTest() {
     @Autowired(required=true)
     lateinit var userRepo: IUserRepo;
 
+    @Autowired(required=true)
+    lateinit var userRoleRepo: IUserRoleRepo;
+
     var user = User(
         firstName = "Edward",
         lastName = "Rogers",
         email = "edward@email.com",
-        role="subscriber",
+        roles = userRoleRepo.findAll(),
         age = 34
     )
 
