@@ -1,12 +1,11 @@
 package edward.project.shared.repositories.network
 
+import edward.project.shared.constants.AuthConstant
 import edward.project.shared.models.User
 import edward.project.shared.repositories.IUserRepo
-import edward.project.shared.repositories.IUserRoleRepo
 
 import org.assertj.core.api.Assertions.*
 
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 import org.springframework.beans.factory.annotation.Autowired
@@ -23,34 +22,13 @@ internal class UserRepoTest() {
     lateinit var entityManager: TestEntityManager
 
     @Autowired(required=true)
-    lateinit var userRepo: IUserRepo;
+    lateinit var userRepo: IUserRepo
 
-    @Autowired(required=true)
-    lateinit var userRoleRepo: IUserRoleRepo;
-
-    var user = User(
-        firstName = "Edward",
-        lastName = "Rogers",
-        email = "edward@email.com",
-        roles = userRoleRepo.findAll(),
-        age = 34
-    )
-
-    @BeforeEach
+//    @BeforeEach
     @Test
     fun `insert user`() {
-        val userInserted = this.userRepo.save(user)
+        val userInserted = this.userRepo.save(AuthConstant.USER_TEST_INFO)
 
-        assertThat(userInserted).matches { u -> u.firstName == user.firstName }
-
-        user = userInserted
-    }
-
-    @Test
-    fun `find all user`() {
-
-        val userFound = this.userRepo.getById(user.id)
-
-        assertThat(userFound).matches { u -> u.id == user.id }
+        assertThat(userInserted).matches { user -> user == userInserted }
     }
 }

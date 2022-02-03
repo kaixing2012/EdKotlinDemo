@@ -1,5 +1,6 @@
 package edward.project.shared.models
 
+import edward.project.shared.enums.UserRoleEnum
 import javax.persistence.*
 
 @Entity
@@ -44,7 +45,6 @@ data class User(
         name = "Email",
         columnDefinition = "TEXT",
         nullable = false,
-        insertable = false,
         updatable = false
     )
     val email: String,
@@ -53,20 +53,37 @@ data class User(
         name = "Age",
         nullable = false,
     )
-    var age: Int,
+    val age: Int,
 
-    @ManyToMany(
-        fetch = FetchType.EAGER,
-        cascade = [CascadeType.ALL]
+    @Column(
+        name = "IsActive",
+        nullable = false,
     )
-    @JoinTable(
-        name = "UserAndRoleJoin",
-        joinColumns = [
-            JoinColumn(name = "UserJoinId", referencedColumnName = "Id")
-        ],
-        inverseJoinColumns = [
-            JoinColumn(name = "RoleJoinId", referencedColumnName = "Id")
-        ]
+    var isActive: Boolean,
+
+    @ElementCollection(targetClass=UserRoleEnum::class)
+    @Enumerated(EnumType.STRING)
+    @JoinTable(name = "UserRolesJoin")
+    @Column(
+        name = "Roles",
+        columnDefinition = "TEXT",
+        nullable = false,
     )
-    val roles: MutableList<UserRole>,
+    val roles: List<UserRoleEnum>,
+
+
+
+//    @ManyToMany(
+//        fetch = FetchType.EAGER,
+//        cascade = [CascadeType.ALL]
+//    )
+//    @JoinTable(
+//        name = "UserAndRoleJoin",
+//        joinColumns = [
+//            JoinColumn(name = "UserJoinId", referencedColumnName = "Id")
+//        ],
+//        inverseJoinColumns = [
+//            JoinColumn(name = "RoleJoinId", referencedColumnName = "Id")
+//        ]
+//    )
 )
