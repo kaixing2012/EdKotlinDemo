@@ -14,10 +14,8 @@ class AuthApiService (
     fun register(reqRegisterJM: ReqRegisterJM): ResRegisterJM {
 
         val user = User(
-            firstName = reqRegisterJM.firstName,
-            lastName = reqRegisterJM.lastName,
-            email = reqRegisterJM.email,
-            age = reqRegisterJM.age,
+            username = reqRegisterJM.username,
+            password = reqRegisterJM.password,
             isActive = true,
             roles = listOf(
                 UserRoleEnum.NON_SUBSCRIBER
@@ -27,10 +25,8 @@ class AuthApiService (
         val newUser = this.userRepo.save(user)
 
         return ResRegisterJM(
-            firstName = newUser.firstName,
-            lastName = newUser.lastName,
-            email = newUser.email,
-            age = newUser.age,
+            username = newUser.username,
+            password = newUser.password,
             isActive = newUser.isActive,
             roles = newUser.roles
         )

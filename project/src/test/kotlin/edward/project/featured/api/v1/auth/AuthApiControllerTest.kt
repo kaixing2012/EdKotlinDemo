@@ -32,10 +32,10 @@ internal class AuthApiControllerTest @Autowired constructor(
         fun `GOOD REQUEST on User Registration`() {
             // given
             val newUser =  object {
-                val firstName = AuthConstant.USER_TEST_INFO.firstName
-                val lastName = AuthConstant.USER_TEST_INFO.lastName
-                val email = AuthConstant.USER_TEST_INFO.email
-                val age = AuthConstant.USER_TEST_INFO.age
+                val username = AuthConstant.USER_TEST_INFO.username
+                val password = AuthConstant.USER_TEST_INFO.password
+                val isActive = AuthConstant.USER_TEST_INFO.isActive
+                val roles = AuthConstant.USER_TEST_INFO.roles
             }
 
             // when
@@ -52,10 +52,8 @@ internal class AuthApiControllerTest @Autowired constructor(
                     status { isCreated() }
                     content {
                         contentType(MediaType.APPLICATION_JSON)
-                        jsonPath("$.firstName") { value(AuthConstant.USER_TEST_INFO.firstName) }
-                        jsonPath("$.lastName") { value(AuthConstant.USER_TEST_INFO.lastName) }
-                        jsonPath("$.email") { value(AuthConstant.USER_TEST_INFO.email) }
-                        jsonPath("$.age") { value(AuthConstant.USER_TEST_INFO.age) }
+                        jsonPath("$.username") { value(AuthConstant.USER_TEST_INFO.username) }
+                        jsonPath("$.password") { value(AuthConstant.USER_TEST_INFO.password) }
                         jsonPath("$.isActive") { value(AuthConstant.USER_TEST_INFO.isActive) }
 //                        jsonPath("$.roles") { value(AuthConstant.USER_TEST_INFO.roles) }
                     }

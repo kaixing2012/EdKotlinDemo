@@ -22,10 +22,8 @@ internal class AuthApiServiceTest {
         every { userRepo.save(any()) } returns AuthConstant.USER_TEST_INFO
 
         val registerJM = ReqRegisterJM(
-            firstName = AuthConstant.USER_TEST_INFO.firstName,
-            lastName = AuthConstant.USER_TEST_INFO.lastName,
-            email = AuthConstant.USER_TEST_INFO.email,
-            age = AuthConstant.USER_TEST_INFO.age,
+            username = AuthConstant.USER_TEST_INFO.username,
+            password = AuthConstant.USER_TEST_INFO.password,
         )
 
         //when
@@ -34,9 +32,7 @@ internal class AuthApiServiceTest {
         //then
         verify(exactly = 1) { userRepo.save(any()) };
 
-        assertThat(registerJM).matches { model -> model.firstName == result.firstName}
-        assertThat(registerJM).matches { model -> model.lastName == result.lastName}
-        assertThat(registerJM).matches { model -> model.email == result.email}
-        assertThat(registerJM).matches { model -> model.age == result.age}
+        assertThat(registerJM).matches { model -> model.username == result.username}
+        assertThat(registerJM).matches { model -> model.password == result.password}
     }
 }

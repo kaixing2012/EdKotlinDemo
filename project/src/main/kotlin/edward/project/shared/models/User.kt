@@ -7,7 +7,10 @@ import javax.persistence.*
 @Table(
     name = "Users",
     uniqueConstraints = [
-        UniqueConstraint(name = "UserEmailUnique", columnNames = ["Email"])
+        UniqueConstraint(
+            name = "UserUniques",
+            columnNames = ["Username"],
+        )
     ]
 )
 data class User(
@@ -19,41 +22,29 @@ data class User(
     )
     @GeneratedValue(
         strategy = GenerationType.SEQUENCE,
-        generator = "UserSeq"
+        generator = "UserSeq",
     )
     @Column(
         name = "Id",
-        updatable = false
+        updatable = false,
     )
     val id: Long = 0,
 
     @Column(
-        name = "FirstName",
+        name = "Username",
         columnDefinition = "TEXT",
         nullable = false,
+        updatable = false,
     )
-    val firstName: String,
+    val username: String,
 
     @Column(
-        name = "LastName",
+        name = "Password",
         columnDefinition = "TEXT",
         nullable = false,
+        updatable = false,
     )
-    val lastName: String,
-
-    @Column(
-        name = "Email",
-        columnDefinition = "TEXT",
-        nullable = false,
-        updatable = false
-    )
-    val email: String,
-
-    @Column(
-        name = "Age",
-        nullable = false,
-    )
-    val age: Int,
+    val password: String,
 
     @Column(
         name = "IsActive",
