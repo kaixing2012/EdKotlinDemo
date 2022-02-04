@@ -59,7 +59,7 @@ data class User(
         name = "IsActive",
         nullable = false,
     )
-    var isActive: Boolean,
+    val isActive: Boolean,
 
     @ElementCollection(targetClass=UserRoleEnum::class)
     @Enumerated(EnumType.STRING)

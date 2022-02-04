@@ -8,7 +8,7 @@ import edward.project.shared.repositories.IUserRepo
 import org.springframework.stereotype.Service
 
 @Service
-class AuthService (
+class AuthApiService (
     private val userRepo: IUserRepo
 ) {
     fun register(reqRegisterJM: ReqRegisterJM): ResRegisterJM {

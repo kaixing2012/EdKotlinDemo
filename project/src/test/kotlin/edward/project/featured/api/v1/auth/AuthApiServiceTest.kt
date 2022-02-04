@@ -12,12 +12,12 @@ import io.mockk.mockk
 import io.mockk.verify
 import io.mockk.every
 
-internal class AuthServiceTest {
+internal class AuthApiServiceTest {
     private val userRepo: IUserRepo = mockk()
-    private val authService: AuthService = AuthService(userRepo)
+    private val authApiService: AuthApiService = AuthApiService(userRepo)
 
     @Test
-    fun `register a new user`() {
+    fun `Register a New User`() {
         //given
         every { userRepo.save(any()) } returns AuthConstant.USER_TEST_INFO
 
@@ -29,7 +29,7 @@ internal class AuthServiceTest {
         )
 
         //when
-        val result = authService.register(registerJM)
+        val result = authApiService.register(registerJM)
 
         //then
         verify(exactly = 1) { userRepo.save(any()) };
