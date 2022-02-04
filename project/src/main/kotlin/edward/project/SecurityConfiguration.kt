@@ -1,7 +1,12 @@
 package edward.project
 
+import edward.project.shared.enums.UserRoleEnum
+import edward.project.shared.services.UserIdentityService
+
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
@@ -11,27 +16,32 @@ import org.springframework.security.crypto.password.PasswordEncoder
 
 @Configuration
 @EnableWebSecurity
-class SecurityConfiguration : WebSecurityConfigurerAdapter() {
-//    private val userPrincipalDetailsService: UserPrincipalDetailsService
-//
-//    init {
-//        this.userPrincipalDetailsService = userPrincipalDetailsService
-//    }
+class SecurityConfiguration(
+    private val userIdentityService: UserIdentityService
+) : WebSecurityConfigurerAdapter() {
 
-    @Throws(Exception::class)
     override fun configure(auth: AuthenticationManagerBuilder) {
-        auth.inMemoryAuthentication()
-            .withUser("admin").password(passwordEncoder()?.encode("admin123")).roles("ADMIN")
-            .and()
-            .withUser("edward").password(passwordEncoder()?.encode("edward123")).roles("USER")
+        auth.authenticationProvider(authenticationProvider())
     }
 
     @Throws(Exception::class)
     override fun configure(http: HttpSecurity) {
         http.authorizeRequests()
-            .anyRequest().authenticated()
+            .antMatchers("/api/v1/auth/admin").hasAnyRole(UserRoleEnum.ADMIN.toString())
+            .antMatchers("/api/v1/auth/subscriber").hasAnyRole(UserRoleEnum.SUBSCRIBER.toString())
+            .antMatchers("/api/v1/auth/non-subscriber").hasAnyRole(UserRoleEnum.NON_SUBSCRIBER.toString())
             .and()
             .httpBasic()
+    }
+
+    @Bean
+    fun authenticationProvider(): DaoAuthenticationProvider {
+        val provider = DaoAuthenticationProvider()
+
+        provider.setPasswordEncoder(passwordEncoder())
+        provider.setUserDetailsService(userIdentityService)
+
+        return provider
     }
 
     @Bean

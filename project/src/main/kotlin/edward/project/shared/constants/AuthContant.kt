@@ -10,7 +10,7 @@ class AuthConstant {
             username = "admin",
             password = "admin123",
             isActive = true,
-            roles = listOf(UserRoleEnum.NON_SUBSCRIBER)
+            roles = "${UserRoleEnum.NON_SUBSCRIBER}"
         )
         val USER_PROFILE_TEST_INFO = UserProfile(
             firstName = "First",

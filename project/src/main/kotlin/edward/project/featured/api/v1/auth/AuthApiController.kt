@@ -20,6 +20,15 @@ class AuthApiController(
     fun handleBadRequest(e: IllegalArgumentException): ResponseEntity<String> =
         ResponseEntity(e.message, HttpStatus.BAD_REQUEST)
 
+    @GetMapping("non-subscriber")
+    fun nonSubscriber() = "non-subscriber"
+
+    @GetMapping("subscriber")
+    fun subscriber() = "subscriber"
+
+    @GetMapping("admin")
+    fun admin() = this.authApiService.getUsers()
+
     @PostMapping("register")
     @ResponseStatus(HttpStatus.CREATED)
     fun register(@RequestBody reqRegisterJM: ReqRegisterJM): ResRegisterJM =

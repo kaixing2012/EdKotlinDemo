@@ -11,10 +11,12 @@ import org.junit.jupiter.api.Test
 import io.mockk.mockk
 import io.mockk.verify
 import io.mockk.every
+import org.springframework.security.crypto.password.PasswordEncoder
 
 internal class AuthApiServiceTest {
+    private val passwordEncoder: PasswordEncoder = mockk()
     private val userRepo: IUserRepo = mockk()
-    private val authApiService: AuthApiService = AuthApiService(userRepo)
+    private val authApiService: AuthApiService = AuthApiService(userRepo, passwordEncoder)
 
     @Test
     fun `Register a New User`() {

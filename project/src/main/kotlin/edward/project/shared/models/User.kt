@@ -1,6 +1,5 @@
 package edward.project.shared.models
 
-import edward.project.shared.enums.UserRoleEnum
 import javax.persistence.*
 
 @Entity
@@ -52,22 +51,22 @@ data class User(
     )
     val isActive: Boolean,
 
-    @ElementCollection(targetClass=UserRoleEnum::class)
-    @Enumerated(EnumType.STRING)
-    @JoinTable(name = "UserRolesJoin")
     @Column(
         name = "Roles",
         columnDefinition = "TEXT",
         nullable = false,
     )
-    val roles: List<UserRoleEnum>,
+    val roles: String,
 
 
+//    @ElementCollection(targetClass=UserRoleEnum::class)
+//    @Enumerated(EnumType.STRING)
 
 //    @ManyToMany(
 //        fetch = FetchType.EAGER,
 //        cascade = [CascadeType.ALL]
 //    )
+
 //    @JoinTable(
 //        name = "UserAndRoleJoin",
 //        joinColumns = [

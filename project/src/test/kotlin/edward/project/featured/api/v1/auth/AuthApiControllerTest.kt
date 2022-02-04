@@ -1,8 +1,8 @@
 package edward.project.featured.api.v1.auth
 
-import com.fasterxml.jackson.databind.ObjectMapper
-import edward.project.featured.api.v1.auth.models.ReqRegisterJM
 import edward.project.shared.constants.AuthConstant
+
+import com.fasterxml.jackson.databind.ObjectMapper
 
 import org.junit.jupiter.api.*
 
@@ -55,7 +55,7 @@ internal class AuthApiControllerTest @Autowired constructor(
                         jsonPath("$.username") { value(AuthConstant.USER_TEST_INFO.username) }
                         jsonPath("$.password") { value(AuthConstant.USER_TEST_INFO.password) }
                         jsonPath("$.isActive") { value(AuthConstant.USER_TEST_INFO.isActive) }
-//                        jsonPath("$.roles") { value(AuthConstant.USER_TEST_INFO.roles) }
+                        jsonPath("$.roles") { value(AuthConstant.USER_TEST_INFO.roles) }
                     }
                 }
         }
